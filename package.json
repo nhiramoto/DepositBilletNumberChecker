@@ -1,0 +1,19 @@
+{
+  "name": "bankbilletnumberchecker",
+  "version": "1.0.0",
+  "description": "An API to verify that a serial number of a bank billet is valid.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhtoshiaki/BankBilletNumberChecker.git"
+  },
+  "author": "nhtoshiaki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nhtoshiaki/BankBilletNumberChecker/issues"
+  },
+  "homepage": "https://github.com/nhtoshiaki/BankBilletNumberChecker#readme"
+}
