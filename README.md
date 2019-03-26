@@ -61,10 +61,10 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
 
     ```json
     {
-        valido: true,
-        valor: 30,
-        vencimento: 'Tue Oct 09 2018 21:00:00 GMT-0300 (Brasilia Standard Time)',
-        linhaDigitavel: '00000000000000000000000000000000000000000000000'
+        "valido": true,
+        "valor": 30,
+        "vencimento": "Tue Oct 09 2018 21:00:00 GMT-0300 (Brasilia Standard Time)",
+        "linhaDigitavel": "00000000000000000000000000000000000000000000000"
     }
     ```
 
@@ -77,7 +77,7 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
 
         ```json
         {
-            error: "Linha digitável não definida."
+            "error": "Linha digitável não definida."
         }
         ```
 
@@ -88,6 +88,6 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
 
         ```json
         {
-            error: "Erro durante processamento da linha digitável."
+            "error": "Erro durante processamento da linha digitável."
         }
         ```
