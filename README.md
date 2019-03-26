@@ -51,7 +51,11 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
 
 - **Parâmetros dos Dados**
 
-`linhaDigitavel=[string]`
+```json
+{
+    "linhaDigitavel": "00000000000000000000000000000000000000000000000"
+}
+```
 
 
 - **Resposta bem sucedida**
