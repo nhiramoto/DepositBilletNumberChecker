@@ -68,10 +68,29 @@ class BoletoBancario extends Boleto {
     }
 
     /**
+     * Calcula o valor do dígito verificador usando o módulo 11.
+     */
+    static digitoVerifMod11(campo) {
+        let soma = 0, prod;
+        let peso = [2, 3, 4, 5, 6, 7, 8, 9], indPeso = 0;
+        for (let i = campo.length - 1; i >= 0; i--) {
+            prod = peso[indPeso] * parseInt(campo.charAt(i));
+            soma += prod;
+            indPeso++;
+            if (indPeso >= peso.length) indPeso = 0;
+        }
+        let dv = 11 - (soma % 11);
+        if (dv === 0 || dv === 10 || dv === 11) dv = 1;
+        return dv;
+    }
+
+    /**
      * Verifica se o boleto é válido.
      */
     get ehValido() {
-        if (this.dvCampo1 != Boleto.digitoVerifMod10(this.campo1)
+        if (!this.estruturaValida()) {
+            this._valido = false;
+        } else if (this.dvCampo1 != BoletoBancario.digitoVerifMod10(this.campo1)
                 && this.dvCampo1 != BoletoBancario.digitoVerifMod11(this.campo1)) {
             this._valido = false;
         } else if (this.dvCampo2 != BoletoBancario.digitoVerifMod10(this.campo2)
@@ -91,23 +110,6 @@ class BoletoBancario extends Boleto {
             }
         }
         return this._valido;
-    }
-
-    /**
-     * Calcula o valor do dígito verificador usando o módulo 11.
-     */
-    static digitoVerifMod11(campo) {
-        let soma = 0, prod;
-        let peso = [2, 3, 4, 5, 6, 7, 8, 9], indPeso = 0;
-        for (let i = campo.length - 1; i >= 0; i--) {
-            prod = peso[indPeso] * parseInt(campo.charAt(i));
-            soma += prod;
-            indPeso++;
-            if (indPeso >= peso.length) indPeso = 0;
-        }
-        let dv = 11 - (soma % 11);
-        if (dv === 0 || dv === 10 || dv === 11) dv = 1;
-        return dv;
     }
 
 }

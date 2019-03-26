@@ -5,6 +5,7 @@ const port = 5000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.set('json spaces', 2);
 
 app.use('/api', require('./routes/api'));
 app.listen(port, () => {

@@ -10,7 +10,9 @@ const _tipo = {
 class Boleto {
 
     constructor(linhaDigitavel) {
-        this._linhaDigitavel = linhaDigitavel.trim();
+        this._linhaDigitavel = linhaDigitavel
+            .trim()
+            .replace(/\s|\./g, '');
     }
 
     //======================== Métodos Estáticos ========================
@@ -39,6 +41,7 @@ class Boleto {
      * Tipo do boleto a partir da linha digitável.
      */
     static tipo(linhaDigitavel) {
+        linhaDigitavel = linhaDigitavel.trim();
         if (linhaDigitavel.charAt(0) === Boleto.DIGITO_ARRECADACAO) {
             return Boleto.Tipo.ARRECADACAO;
         } else {
@@ -79,6 +82,7 @@ class Boleto {
             }
         }
         let dv = 10 - (soma % 10);
+        if (dv == 10) dv = 0;
         return dv;
     }
     //======================== Métodos Estáticos ========================
