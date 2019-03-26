@@ -63,7 +63,7 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
     {
         "valido": true,
         "valor": 30,
-        "vencimento": "Tue Oct 09 2018 21:00:00 GMT-0300 (Brasilia Standard Time)",
+        "vencimento": "2018-10-10",
         "linhaDigitavel": "00000000000000000000000000000000000000000000000"
     }
     ```
