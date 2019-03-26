@@ -42,35 +42,52 @@ Retorna JSON com informações se o boleto é válido, a data de vencimento e o 
 
 - **URL**
 
-```
-/boleto
-```
+`/api/boleto`
 
 - **Método**
 
-```
-POST
-```
+`POST`
+
 
 - **Parâmetros dos Dados**
 
-```
-linhaDigitavel=[string]
-```
+`linhaDigitavel=[string]`
+
 
 - **Resposta bem sucedida**
 
     - **Código**: 200
-    - **Exemplo do conteúdo**: `{ valido: true, valorAPagar: 30, vencimento: '2019-12-30' }`
+    - **Exemplo do conteúdo**:
+
+    ```json
+    {
+        valido: true,
+        valor: 30,
+        vencimento: 'Tue Oct 09 2018 21:00:00 GMT-0300 (Brasilia Standard Time)',
+        linhaDigitavel: '00000000000000000000000000000000000000000000000'
+    }
+    ```
 
 - **Resposta de Erro**
 
     - **Parâmetro ausente**
-    
+
         - **Código**: 422
-        - **Conteúdo**: `{ error: "Linha digitável não definida." }`
-    
+        - **Conteúdo**:
+
+        ```json
+        {
+            error: "Linha digitável não definida."
+        }
+        ```
+
     - **Erro no processamento**
 
         - **Código**: 500
-        - **Conteúdo**: `{ error: "Erro durante processamento da linha digitável." }`
+        - **Conteúdo**:
+
+        ```json
+        {
+            error: "Erro durante processamento da linha digitável."
+        }
+        ```

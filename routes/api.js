@@ -6,16 +6,27 @@ const BoletoBancario = require('../models/boleto-bancario');
 const BoletoArrecadacao = require('../models/boleto-arrecadacao');
 
 router.post('/boleto', (req, res) => {
-    console.log('Requisitando POST em "/boleto".');
+    console.log(`Requisitando ${req.method} em "${req.url}".`);
     if (typeof(req.body.linhaDigitavel) !== 'undefined') {
         try { 
             let linhaDigitavel = req.body.linhaDigitavel;
-            let boleto = new Boleto(linhaDigitavel);
-            res.send({
-                estruturaValida: boleto.estruturaValida(),
-                tipo: boleto.tipo,
-                linhaDigitavel: boleto.linhaDigitavel
-            });
+            let tipo = Boleto.tipo(linhaDigitavel);
+            let boleto;
+            if (tipo === Boleto.Tipo.BANCARIO) {
+                boleto = new BoletoBancario(linhaDigitavel);
+            } else {
+                boleto = new BoletoArrecadacao(linhaDigitavel);
+            }
+            let valido = boleto.ehValido;
+            let valor = boleto.valor
+            let vencimento = boleto.vencimento;
+            let dados = {
+                valido: valido,
+                valor: valor,
+                vencimento: vencimento != null ? vencimento.toString() : null,
+                linhaDigitavel: valido ? boleto.linhaDigitavel : null
+            };
+            res.send(dados);
         } catch(err) {
             res.status(500);
             res.send({

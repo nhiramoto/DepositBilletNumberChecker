@@ -13,6 +13,7 @@ class Boleto {
         this._linhaDigitavel = linhaDigitavel.trim();
     }
 
+    //======================== Métodos Estáticos ========================
     /*
      * Comprimento padrão da linha digitável (incluindo DVs).
      */
@@ -44,6 +45,43 @@ class Boleto {
             return Boleto.Tipo.BANCARIO;
         }
     }
+
+    /**
+     * Função auxiliar para soma de digitos de um número.
+     */
+    static somaDigitos(numero) {
+        if (numero == null) {
+            return 0;
+        } else {
+            let soma = 0;
+            let algarismos = Number(numero).toString();
+            for (let i = 0; i < algarismos.length; i++) {
+                soma += parseInt(algarismos.charAt(i));
+            }
+            return soma;
+        }
+    }
+
+    /**
+     * Calcula o valor do dígito verificador usando o módulo 10.
+     */
+    static digitoVerifMod10(campo) {
+        let soma = 0;
+        for (let i = campo.length - 1; i >= 0; i--) {
+            if ((campo.length - 1 - i) % 2 === 0) {
+                let prod = 2 * parseInt(campo.charAt(i));
+                if (prod >= 10) {
+                    prod = Boleto.somaDigitos(prod);
+                }
+                soma += prod;
+            } else {
+                soma += parseInt(campo.charAt(i));
+            }
+        }
+        let dv = 10 - (soma % 10);
+        return dv;
+    }
+    //======================== Métodos Estáticos ========================
 
     /**
      * Tipo do boleto atual.
